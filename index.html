@@ -28,7 +28,7 @@
             <h3>Settings</h3>
             <div class="control-row">
                 <label for="chk-music">Music</label>
-                <input type="checkbox" id="chk-music" checked>
+                <input type="checkbox" id="chk-music">
             </div>
             <div class="control-row">
                 <label for="chk-sound">Sound Effects</label>
@@ -53,6 +53,20 @@
     </div>
 
     <canvas id="game-container"></canvas>
+    <div id="mobile-controls">
+        <div id="mobile-top">
+            <button id="btn-mobile-music" class="mobile-btn icon-btn">🎵</button>
+            <button id="btn-mobile-sound" class="mobile-btn icon-btn">🔊</button>
+        </div>
+        <div id="mobile-bottom">
+            <button id="btn-mobile-left" class="mobile-btn flipper-btn">L</button>
+            <div id="mobile-right-group">
+                <button id="btn-mobile-plunger" class="mobile-btn plunger-btn">🚀</button>
+                <button id="btn-mobile-right" class="mobile-btn flipper-btn">R</button>
+            </div>
+        </div>
+    </div>
+
     <script src="Vec2.js"></script>
     <script src="theme.js"></script>
     <script src="SoundManager.js"></script>

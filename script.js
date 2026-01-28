@@ -400,6 +400,90 @@ chkMusic.addEventListener('change', (e) => {
 soundManager.enabled = chkSound.checked;
 soundManager.musicEnabled = chkMusic.checked;
 
+// --- Mobile Controls Logic ---
+const btnMobileLeft = document.getElementById('btn-mobile-left');
+const btnMobileRight = document.getElementById('btn-mobile-right');
+const btnMobilePlunger = document.getElementById('btn-mobile-plunger');
+const btnMobileMusic = document.getElementById('btn-mobile-music');
+const btnMobileSound = document.getElementById('btn-mobile-sound');
+
+function attachTouch(btn, keyInfo) {
+    const startObj = (e) => {
+        e.preventDefault();
+        keys[keyInfo] = true;
+    };
+    const endObj = (e) => {
+        e.preventDefault();
+        keys[keyInfo] = false;
+    };
+    btn.addEventListener('touchstart', startObj, { passive: false });
+    btn.addEventListener('touchend', endObj, { passive: false });
+    btn.addEventListener('mousedown', startObj);
+    btn.addEventListener('mouseup', endObj);
+    btn.addEventListener('mouseleave', endObj);
+}
+
+attachTouch(btnMobileLeft, 'leftFlipper');
+attachTouch(btnMobileRight, 'rightFlipper');
+attachTouch(btnMobilePlunger, 'plunger');
+
+// Audio Toggles
+function updateMobileAudioUI() {
+    if (soundManager.musicEnabled) {
+        btnMobileMusic.classList.add('active');
+        btnMobileMusic.classList.remove('inactive');
+    } else {
+        btnMobileMusic.classList.remove('active');
+        btnMobileMusic.classList.add('inactive');
+    }
+
+    if (soundManager.enabled) {
+        btnMobileSound.classList.add('active');
+        btnMobileSound.classList.remove('inactive');
+    } else {
+        btnMobileSound.classList.remove('active');
+        btnMobileSound.classList.add('inactive');
+    }
+}
+
+btnMobileMusic.addEventListener('click', (e) => {
+    // Toggle Checkbox
+    chkMusic.checked = !chkMusic.checked;
+    chkMusic.dispatchEvent(new Event('change'));
+    updateMobileAudioUI();
+
+    // Init audio if needed
+    if (soundManager.musicEnabled && !soundManager.ctx) {
+        soundManager.init();
+        soundManager.startMusic();
+    }
+});
+
+btnMobileSound.addEventListener('click', (e) => {
+    // Toggle Checkbox
+    chkSound.checked = !chkSound.checked;
+    chkSound.dispatchEvent(new Event('change'));
+    updateMobileAudioUI();
+});
+
+// Initial UI Sync
+updateMobileAudioUI();
+
+// Tap to Restart (Mobile/Universal)
+canvas.addEventListener('touchstart', (e) => {
+    if (state.gameOver) {
+        e.preventDefault(); // Prevent scroll/zoom
+        // Reset Game Logic (Similar to Space Key)
+        state.score = 0;
+        state.lives = 3;
+        state.gameOver = false;
+        state.ball.pos = new Vec2(474, 600);
+        state.ball.vel = new Vec2(0, 0);
+        state.targetBanks.forEach(bank => bank.reset());
+        keys.plunger = false;
+    }
+}, { passive: false });
+
 // Start
 console.log('Starting Game Loop...');
 loop();

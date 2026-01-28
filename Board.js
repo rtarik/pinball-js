@@ -30,10 +30,10 @@ function createBoard() {
             // Funnel Walls (V-Shape) - Continuous (Background)
             // Shifted Down +60px to maintain angle with lower start
             // Left Funnel: (10, 560) -> (175, 740)
-            new LineSegment(10, 560, 175, 740),
+            new LineSegment(10, 560, 160, 740),
 
             // Right Funnel: (458, 560) -> (325, 740)
-            new LineSegment(458, 560, 325, 740),
+            new LineSegment(458, 560, 340, 740),
 
             // --- Left Cove Barrier (Vertical Drop) ---
             // Shifted Down +40px
@@ -49,10 +49,10 @@ function createBoard() {
         // Shifted Down to y=740
         flippers: [
             // Left Flipper
-            new Flipper(175, 740, 60, 0.52, -0.52, 'left'),
+            new Flipper(160, 740, 60, 0.52, -0.52, 'left'),
 
             // Right Flipper
-            new Flipper(325, 740, 60, Math.PI - 0.52, Math.PI + 0.52, 'right')
+            new Flipper(340, 740, 60, Math.PI - 0.52, Math.PI + 0.52, 'right')
         ],
 
         // --- Plunger ---
