@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinball</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="game-ui">
+        <h1>Pinball</h1>
+
+        <div class="panel-section">
+            <h3>Controls</h3>
+            <div class="control-row">
+                <label>Left Flipper</label>
+                <button id="btn-bind-left" class="key-bind">KeyX</button>
+            </div>
+            <div class="control-row">
+                <label>Right Flipper</label>
+                <button id="btn-bind-right" class="key-bind">KeyN</button>
+            </div>
+        </div>
+
+        <div class="panel-section">
+            <h3>Settings</h3>
+            <div class="control-row">
+                <label for="chk-music">Music</label>
+                <input type="checkbox" id="chk-music" checked>
+            </div>
+            <div class="control-row">
+                <label for="chk-sound">Sound Effects</label>
+                <input type="checkbox" id="chk-sound" checked>
+            </div>
+        </div>
+
+        <div class="panel-section help-text">
+            <p>Space: Plunger</p>
+            <p>P: Pause</p>
+        </div>
+    </div>
+
+    <div id="hud">
+        <div id="score-display">SCORE: 0</div>
+        <div id="lives-display">
+            <!-- Populated by JS -->
+            <div class="life-dot"></div>
+            <div class="life-dot"></div>
+            <div class="life-dot"></div>
+        </div>
+    </div>
+
+    <canvas id="game-container"></canvas>
+    <script src="Vec2.js"></script>
+    <script src="theme.js"></script>
+    <script src="SoundManager.js"></script>
+    <script src="Entities.js"></script>
+    <script src="Collision.js"></script>
+    <script src="Board.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>
